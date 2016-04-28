@@ -3,12 +3,12 @@ LABCOUNT=0
 XMLCOUNT=0
 
 IFS=$'\n'
-XML=$( grep "filename" ~/medialab/media.xml | cut -f2 -d ">" | cut -f1 -d "<" | sort | uniq ) 2>&1
+XML=$( grep "filename" ~/medialab/media.xml | cut -f2 -d ">" | cut -f1 -d "<" | sort | uniq )
 LAB=$( ls -x1 ~/medialab/ )
 
 echo "medialab files not in media.xml:"
 for LABFILE in $LAB ;do
-   if ! ( grep -q $LABFILE ~/medialab/media.xml ) && ! [[ -z $LABFILE ]] ;then
+   if ! ( grep -q $LABFILE ~/medialab/media.xml ) ;then
       echo "$LABFILE"
       (( LABCOUNT++ ))
    else

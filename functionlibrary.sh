@@ -1,22 +1,30 @@
 #!/bin/bash
+#Andrew Gordon
+#CS225
+#Lab 11 - functionlibrary.sh
 
-function Directory()
+#function Prep does two things:
+#-Retrieves the timestamp (MONTH and DAY) of file
+#-Creates destination directory if it does not exist
+Timestamp()
 {
-## GETTING VALUES FROM EACH FILE
 MONTH=$(date +%B -r $1)
-DAY=$(date +%d -r $1)  
-## MAKING DIRECTORY IF NEEDED
-if [ ! -d ~/TIMESTAMPS/$MONTH/$DAY ] ;then
-    mkdir -p ~/TIMESTAMPS/$MONTH/$DAY
+DAY=$(date +%d -r $1)
+}
+
+Directory()
+{
+if [ ! -d $DEST ] ;then
+  mkdir -p $DEST
 fi
 }
 
-function Move()
+Move()
 {
-mv $FILE ~/TIMESTAMPS/$MONTH/$DAY
+mv $1 $2
 }
 
-function Copy()
+Copy()
 {
-cp $FILE ~TIMESTAMPS/$MONTH/$DAY
+cp -a $1 $2
 }

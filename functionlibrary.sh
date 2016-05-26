@@ -2,10 +2,8 @@
 #Andrew Gordon
 #CS225
 #Lab 11 - functionlibrary.sh
+#function library for generic functions (check timestamp, create directory, print syntax etc..)
 
-#function Prep does two things:
-#-Retrieves the timestamp (MONTH and DAY) of file
-#-Creates destination directory if it does not exist
 Timestamp()
 {
 MONTH=$(date +%B -r $1)

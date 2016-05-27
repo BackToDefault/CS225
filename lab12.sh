@@ -20,9 +20,7 @@
 #-trap for control-c
 #-uses pattern substitution
 #-uses arrays
-trap INT
-
-
+trap '' INT
 IFS=$'\n'
 C="0"
 BOOK=$(tail -n +2 /var/share/CS225/addresses.csv)

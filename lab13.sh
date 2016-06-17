@@ -1,54 +1,43 @@
 #!/bin/bash
+#Andrew Gordon
+#CS225
+#Lab 13
+#6/7/2016
+
+#Objective: Create a script with four functions using BASH's in process regular expressions to check 
+#the validity of Social Security numbers, telephone numbers, IP addresses and credit card numbers based on each particular data format.
+# Take a piece of data as an argument and echo back it's type based on the results of these functions.
+# Each function will be named check_ip, check_ssn, check_pn and check_ccn.
+# Each function will take one argument - the data in question
+# Each function will return a message and a 1 or 0 depending on the outcome of the comparison
+# Make sure the script traps control-c and exits
+# Make sure the script prints out help if no argument is given
+
 source /root/Projects/CS225/functions.lab13
 trap '' SIGINT
 
-while getopts :1234 opt ;do
-  case $opt in
-    1) do=1 ;;
-    2) do=2 ;;
-    3) do=3 ;;
-    4) do=4 ;;
-    \?) echo "ERROR: Unknown Option. Try $LAB12 -h for assistance."
-        exit 1 ;;
-  esac
-done
-shift $((OPTIND-1))
-if [[ "$do" = "1" ]] ;then
-     TestIP=$1
-     check_ip $TestIP
-     if [[ $Valid = 1 ]] ;then
-       echo "IP valid"
-     else
-       echo "IP not valid"
-     fi
+if [[ -z $1 ]] ;then
+  echo "Argument input needed."
+  echo "${0##*/} INPUT"
+  echo "Input will be determined as IP, SSN, PN, or CCN."
+  echo "    FORMAT:             BOTTOM RANGE:       TOP RANGE:"
+  echo "IP: ###.###.###.###     0.0.0.0             255.255.255.255"
+  echo "SSN ###-##-####         000-00-0000         999-99-9999"
+  echo "PN  ###-###-####        000-000-0000        999-999-9999"
+  echo "CCN ####-####-####-#### 0000-0000-0000-0000 9999-9999-9999-9999"
+  exit 1;
 fi
 
-if [[ "$do" = "2" ]] ;then
-     TestSSN=$1
-     check_ssn $TestSSN
-     if [[ $Valid = 1 ]] ;then
-       echo "SSN valid"
-     else
-       echo "SSN not valid"
-     fi
+INPUT=$1
+if check_ip $INPUT ;then 
+  echo "$INPUT is a IP."
 fi
-
-if [[ "$do" = "3" ]] ;then
-     TestPN=$1
-     check_pn $TestPN
-     if [[ $Valid = 1 ]] ;then
-       echo "Phone number valid"
-     else
-       echo "Phone number not valid"
-     fi
+if check_ssn $INPUT ;then
+  echo "$INPUT is a SSN."
 fi
-
-if [[ "$do" = "4" ]] ;then
-     TestCCN=$1
-     check_ccn $TestCCN
-     if [[ $Valid = 1 ]] ;then
-       echo "Credit card number valid"
-     else
-       echo "Credit card number not valid"
-     fi
+if check_pn $INPUT ;then
+  echo "$INPUT is a PN."
+fi
+if check_ccn ;then
+  echo "$INPUT is a CCN."
 fi

@@ -1,7 +1,8 @@
 #!/bin/bash
 source /root/Projects/CS225/library.sh
-
-#trap cleanup INT TERM
+trap Error INT TERM
+trap cleanup INT TERM
+Install
 
 while getopts :fd opt ;do
   case $opt in
@@ -12,13 +13,25 @@ while getopts :fd opt ;do
   esac
 done
 shift $((OPTIND-1))
+
 SRCE=$1/*
+PicCount=0
+MovCount=0
+PicDup=0
+MovDup=0
+Sort=0
+FileCount=0
+Hashes=$(mktemp $HOME/hashes.XXXXXX)
 
 for FILE in $SRCE ;do
   (( FileCount ++ ))
 done
 
-source /root/Projects/CS225/library.sh
+if [[ $(find $1 -maxdepth 0 -type d -empty 2>/dev/null) ]] ;then
+    echo "Directory empty"
+    cleanup
+fi
+
 for FILE in $SRCE ;do
   if [[ "$FILE" == *.JPG ]] ;then
     EXIF ${FILE}
@@ -26,18 +39,16 @@ for FILE in $SRCE ;do
     TIME ${FILE}
   fi
   Directory ${FILE}
-#  Hash ${FILE} $DEST $Year $Month $Day $Hour $Minute $Second $Camera $Filetype
   (( Sort ++ ))
-  if [[ "$DEST" == *.jpg ]] ;then
-    (( PicCount ++ ))
+  if [[ ! -e $DEST ]] ;then
+    Doing
   else
-    (( MovCount ++ ))
+    Hash
+    if [[ "$Duplicate" -ne 1 ]] ;then
+      Doing
+    fi
   fi
-  if [[ -e $DEST ]] ;then
-    Doing $DEST $FileCount $Sort $FORCE
-  else
-    Hash ${FILE} $DEST $Year $Month $Day $Hour $Minute $Second $Camera $Filetype
-  fi
+Duplicate=""
 done
-
-Summary $PicCount $MovMount
+Summary
+cleanup

@@ -1,6 +1,28 @@
 #!/bin/bash
 #Lab 9
 #Andrew Gordon
+#Objective: Create a script that parses commandline arguments and options.
+
+#    Create a script named lab9.sh
+#    The script should take these options
+#        -d - turns on debugging (set -x)
+#        -v - sets the VERBOSE variable to true
+#        -h - prints out a help message with the name of the script (and no path information) plus the options
+#        -n <name> - takes a name argument and prints a message on the screen
+#        -l <dir> - have it list the directory using a for loop or ls (ask yes/no before proceeding)
+#        any other options - prints the help message and exits
+#    Puts all additional arguments in $1 $2 etc.
+
+  
+
+#Needed:
+
+#    while
+#    case
+#    getopts
+#    parameter expansion
+#    shift
+#    set
 
 while getopts :h:l:d:n:v opt ;do
   case $opt in

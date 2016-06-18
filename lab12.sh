@@ -20,6 +20,7 @@
 #-trap for control-c
 #-uses pattern substitution
 #-uses arrays
+
 trap '' INT
 IFS=$'\n'
 C="0"

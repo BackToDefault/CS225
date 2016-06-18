@@ -1,33 +1,6 @@
 #!/bin/bash
-#Lab 10
 #Andrew Gordon
-
-#Objective: Create a script that does work and cleans up if forced to exit
-
-#    Script should list all files one per line in the entire OS
-#    The filelist should be stored in a temporary file
-#    If a user presses control-c a function will clean up the temporary file and exit
-
- 
-
-#Output:
-
-#     File 1:  testfile.sh
-
-#     File 2:  testfile2.sh
-
-#     ....
-
- 
-
-#Items to use:
-
-#    traps
-#    functions
-#    conditionals
-#    loops
-#    mktemp
-
+#Lab 10
 
 FLIST=$(find / -type f)
 OSTEMP=$(mktemp)
